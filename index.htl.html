@@ -1,0 +1,3594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bridal Bliss Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Cinzel:wght@400;500;600&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════════════════════════
+       ROOT VARIABLES (unified palette)
+    ══════════════════════════════ */
+    :root {
+      --rose: #c0395e;
+      --rose-dark: #8b1f3f;
+      --rose-light: #f7d6e0;
+      --rose-pale: #fdf0f4;
+      --gold: #c9a84c;
+      --gold-light: #f0dea0;
+      --cream: #faf6f1;
+      --text-dark: #2a1a20;
+      --text-mid: #6b3d4e;
+      --text-light: #a07080;
+
+      /* sandal-section extras */
+      --pink-deep:   #d63384;
+      --pink-mid:    #e91e8c;
+      --pink-soft:   #f48fb1;
+      --pink-light:  #fce4ec;
+      --pink-pale:   #fff0f5;
+      --pink-blush:  #ffd6e7;
+
+      /* cosmetics-section extras */
+      --cos-rose:    #c9006e;
+      --cos-gold:    #c89b5c;
+      --cos-gold-lt: #f5e6cb;
+      --cos-glass:   rgba(255,255,255,0.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── PAGE SYSTEM ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      background: linear-gradient(135deg, var(--rose-dark) 0%, var(--rose) 50%, #e8527a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 50px;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '✦  ✦  ✦';
+      display: block;
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 14px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border: 1px solid rgba(201,168,76,0.45);
+      padding: 5px 18px;
+      border-radius: 30px;
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 300;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    header p {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 30px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 30px;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(4px);
+      background: rgba(255,255,255,0.06);
+      cursor: pointer;
+    }
+
+    nav a:hover, nav a.active {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.6);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      text-align: center;
+      padding: 40px 20px 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .divider span {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .divider span::before,
+    .divider span::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+
+    .divider span::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    /* ── HOME PRODUCT GRID ── */
+    section.grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 28px;
+      padding: 24px 40px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ── HOME PRODUCT CARD ── */
+    .product {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(176, 50, 90, 0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(176, 50, 90, 0.15);
+    }
+
+    .product-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+    }
+
+    .product img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .product:hover img {
+      transform: scale(1.07);
+    }
+
+    .product-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(139,31,63,0.35) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255,255,255,0.9);
+      color: var(--rose);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+
+    .product-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .product h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    .product-sub {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .product a.btn, .product button.btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: var(--rose-dark);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 2px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+    }
+
+    .product a.btn::after, .product button.btn::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+
+    .product a.btn:hover, .product button.btn:hover {
+      background: var(--rose);
+      transform: translateX(3px);
+    }
+
+    /* ── BANNER STRIP ── */
+    .banner-strip {
+      background: linear-gradient(90deg, var(--rose-dark), var(--rose), var(--rose-dark));
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .banner-strip span {
+      margin: 0 20px;
+      color: var(--gold-light);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: linear-gradient(135deg, var(--rose-dark), #6a1535);
+      color: rgba(255,255,255,0.85);
+      text-align: center;
+      padding: 40px 20px 30px;
+      position: relative;
+    }
+
+    footer::before {
+      content: '❧';
+      display: block;
+      font-size: 28px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    footer .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 300;
+      font-style: italic;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    footer p {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      line-height: 2;
+      color: rgba(255,255,255,0.65);
+    }
+
+    footer a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    footer .footer-divider {
+      width: 60px;
+      height: 1px;
+      background: rgba(201,168,76,0.4);
+      margin: 18px auto;
+    }
+
+    footer .copyright {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 6px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header > * { animation: fadeUp 0.7s ease both; }
+    .header-badge { animation-delay: 0.1s; }
+    header h1    { animation-delay: 0.2s; }
+    header p     { animation-delay: 0.3s; }
+    nav          { animation-delay: 0.4s; }
+
+    .product {
+      animation: fadeUp 0.6s ease both;
+    }
+    .product:nth-child(1) { animation-delay: 0.1s; }
+    .product:nth-child(2) { animation-delay: 0.2s; }
+    .product:nth-child(3) { animation-delay: 0.3s; }
+    .product:nth-child(4) { animation-delay: 0.4s; }
+    .product:nth-child(5) { animation-delay: 0.5s; }
+    .product:nth-child(6) { animation-delay: 0.6s; }
+    .product:nth-child(7) { animation-delay: 0.7s; }
+
+    /* ══════════════════════════════════════
+       INNER PAGES (Saree / Lehenga / Dress)
+       ══════════════════════════════════════ */
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1px solid var(--rose);
+      color: var(--rose);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin: 30px 40px 0;
+    }
+    .back-btn::before { content: '←'; }
+    .back-btn:hover {
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .inner-hero {
+      position: relative;
+      height: 420px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .inner-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: brightness(0.72);
+    }
+
+    .inner-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(139,31,63,0.75) 0%, rgba(0,0,0,0.1) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 50px 60px;
+    }
+
+    .inner-hero-overlay .badge {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border: 1px solid rgba(201,168,76,0.5);
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .inner-hero-overlay h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.1;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .inner-hero-overlay h2 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .inner-hero-overlay p {
+      color: rgba(255,255,255,0.78);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 28px 40px 10px;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 30px;
+      border: 1px solid var(--rose-light);
+      background: #fff;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--rose-dark);
+      color: #fff;
+      border-color: var(--rose-dark);
+    }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 24px 40px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .collection-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(176, 50, 90, 0.09);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .collection-card:nth-child(1) { animation-delay: 0.05s; }
+    .collection-card:nth-child(2) { animation-delay: 0.12s; }
+    .collection-card:nth-child(3) { animation-delay: 0.19s; }
+    .collection-card:nth-child(4) { animation-delay: 0.26s; }
+    .collection-card:nth-child(5) { animation-delay: 0.33s; }
+    .collection-card:nth-child(6) { animation-delay: 0.40s; }
+    .collection-card:nth-child(7) { animation-delay: 0.47s; }
+    .collection-card:nth-child(8) { animation-delay: 0.54s; }
+
+    .collection-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(176, 50, 90, 0.18);
+    }
+
+    .cc-img-wrap {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+    }
+
+    .cc-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .collection-card:hover .cc-img-wrap img {
+      transform: scale(1.09);
+    }
+
+    .cc-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(139,31,63,0.4) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .cc-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255,255,255,0.92);
+      color: var(--rose);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+    .cc-price {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(139,31,63,0.88);
+      color: var(--gold-light);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      z-index: 2;
+      backdrop-filter: blur(6px);
+    }
+
+    .cc-body {
+      padding: 20px 22px 24px;
+    }
+
+    .cc-body .cc-sub {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .cc-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .cc-body p {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .cc-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cc-actions .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 22px;
+      background: var(--rose-dark);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .cc-actions .btn-primary::after { content: '→'; }
+
+    .cc-actions .btn-primary:hover {
+      background: var(--rose);
+      transform: translateX(3px);
+    }
+
+    .cc-actions .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 18px;
+      background: transparent;
+      color: var(--rose);
+      border: 1px solid var(--rose-light);
+      border-radius: 30px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cc-actions .btn-outline:hover {
+      background: var(--rose-pale);
+      border-color: var(--rose);
+    }
+
+    .features-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      background: #fff;
+      border-top: 1px solid var(--rose-light);
+      border-bottom: 1px solid var(--rose-light);
+      margin: 10px 0 0;
+    }
+
+    .feature-item {
+      flex: 1 1 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 20px;
+      border-right: 1px solid var(--rose-light);
+      text-align: center;
+    }
+
+    .feature-item:last-child { border-right: none; }
+
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .feature-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .feature-item p {
+      font-size: 11px;
+      color: var(--text-light);
+      letter-spacing: 1px;
+    }
+
+    .testimonial-strip {
+      background: var(--rose-pale);
+      padding: 50px 40px;
+      text-align: center;
+    }
+
+    .testimonial-strip .ts-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .testimonials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .tcard {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 28px 22px;
+      max-width: 300px;
+      box-shadow: 0 4px 16px rgba(176, 50, 90, 0.07);
+      text-align: left;
+    }
+
+    .tcard .stars {
+      color: var(--gold);
+      font-size: 14px;
+      margin-bottom: 12px;
+      letter-spacing: 3px;
+    }
+
+    .tcard p {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 14px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .tcard .tname {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .section-heading {
+      text-align: center;
+      padding: 44px 20px 4px;
+    }
+
+    .section-heading .sh-sub {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .section-heading h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 300;
+      color: var(--text-dark);
+    }
+
+    .section-heading h2 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    /* ══════════════════════════════
+       SANDAL PAGE STYLES
+    ══════════════════════════════ */
+    .sandal-hero {
+      background: linear-gradient(135deg, #f8bbd0 0%, #ffffff 40%, #fce4ec 70%, #f48fb1 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .sandal-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 50%, rgba(233,30,140,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 30%, rgba(244,143,177,0.18) 0%, transparent 50%);
+    }
+
+    .sandal-hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 50px 20px 20px;
+    }
+
+    .sandal-hero-inner h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--text-dark);
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+
+    .sandal-hero-inner h2 em { font-style: italic; color: var(--pink-deep); }
+
+    .sandal-hero-inner .tagline {
+      font-weight: 200;
+      font-size: 0.7rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 30px;
+    }
+
+    /* sandal section labels */
+    .sec-label {
+      text-align: center;
+      padding: 48px 20px 6px;
+    }
+    .sec-label .eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--pink-deep);
+      font-weight: 400;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .eyebrow-line {
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--pink-soft));
+    }
+    .eyebrow-line.r { background: linear-gradient(to left, transparent, var(--pink-soft)); }
+
+    .sec-label h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      color: var(--text-dark);
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+    .sec-label p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      letter-spacing: 1px;
+      margin-bottom: 32px;
+    }
+
+    /* sandal band */
+    .band {
+      background: linear-gradient(135deg, #fce4ec, #ffffff, #ffd6e7);
+      border-top: 1px solid rgba(214,51,132,0.12);
+      border-bottom: 1px solid rgba(214,51,132,0.12);
+      padding: 10px 0 0;
+      margin-top: 10px;
+    }
+
+    /* sandal grid */
+    .sandal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      padding: 0 28px 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* sandal product card */
+    .sandal-card {
+      background: #fff;
+      border: 1px solid rgba(214,51,132,0.13);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 3px 20px rgba(214,51,132,0.07);
+      transition: transform 0.32s ease, box-shadow 0.32s ease;
+      position: relative;
+      animation: cardIn 0.55s ease both;
+    }
+
+    .sandal-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 44px rgba(214,51,132,0.18);
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .sandal-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      background: linear-gradient(135deg, var(--pink-deep), #ad1457);
+      color: white;
+      font-family: 'Cinzel', serif;
+      font-size: 0.52rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .sandal-img-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      overflow: hidden;
+      background: var(--pink-pale);
+    }
+
+    .sandal-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .sandal-card:hover .sandal-img-wrap img { transform: scale(1.08); }
+
+    .sandal-img-wrap::after {
+      content: '✦ Quick View';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 2.5px;
+      color: white;
+      background: rgba(214,51,132,0.45);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sandal-card:hover .sandal-img-wrap::after { opacity: 1; }
+
+    .sandal-body {
+      padding: 16px 16px 18px;
+      border-top: 1px solid var(--pink-light);
+      background: linear-gradient(180deg, #fff 0%, #fff8fb 100%);
+    }
+
+    .sandal-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+      letter-spacing: 0.4px;
+    }
+
+    .sandal-meta {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 12px;
+    }
+
+    .sandal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .sandal-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--pink-deep);
+      font-weight: 600;
+    }
+
+    .sandal-buy-btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, #e91e8c, #ad1457);
+      color: white;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(214,51,132,0.35);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .sandal-buy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(214,51,132,0.52);
+    }
+
+    /* sandal stagger */
+    .sandal-grid .sandal-card:nth-child(1) { animation-delay: .05s; }
+    .sandal-grid .sandal-card:nth-child(2) { animation-delay: .12s; }
+    .sandal-grid .sandal-card:nth-child(3) { animation-delay: .19s; }
+    .sandal-grid .sandal-card:nth-child(4) { animation-delay: .26s; }
+    .sandal-grid .sandal-card:nth-child(5) { animation-delay: .33s; }
+    .sandal-grid .sandal-card:nth-child(6) { animation-delay: .40s; }
+
+    /* sandal promo banner */
+    .sandal-promo {
+      background: linear-gradient(135deg, var(--pink-deep), #880e4f);
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    .sandal-promo h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .sandal-promo p {
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      opacity: 0.88;
+      margin-bottom: 16px;
+    }
+
+    .sandal-promo-btn {
+      display: inline-block;
+      padding: 11px 32px;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      color: white;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      border-radius: 30px;
+      transition: background 0.3s, color 0.3s;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .sandal-promo-btn:hover { background: white; color: var(--pink-deep); }
+
+    /* ══════════════════════════════
+       COSMETICS PAGE STYLES
+    ══════════════════════════════ */
+    .cos-announce {
+      background: linear-gradient(90deg, var(--cos-rose) 0%, #9b006e 50%, var(--cos-rose) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      font-weight: 300;
+    }
+
+    .cos-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      min-height: 60vh;
+      padding: 6vh 8vw;
+      gap: 4rem;
+      background: linear-gradient(135deg, #fde8f0 0%, #fff4fb 50%, #fce4c8 100%);
+    }
+
+    .cos-hero-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      font-weight: 300;
+      color: var(--text-dark);
+    }
+
+    .cos-hero-text h2 em {
+      font-style: italic;
+      color: var(--cos-rose);
+    }
+
+    .cos-hero-subtitle {
+      margin-top: 1.4rem;
+      font-size: .95rem;
+      font-weight: 300;
+      letter-spacing: .05em;
+      line-height: 1.8;
+      color: #6b3a4e;
+      max-width: 400px;
+    }
+
+    .cos-hero-badges {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .cos-badge { text-align: center; }
+
+    .cos-badge .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--cos-rose);
+    }
+
+    .cos-badge .lbl {
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #8a4060;
+    }
+
+    .cos-badge-sep { width: 1px; background: rgba(200,155,92,.3); align-self: stretch; }
+
+    .cos-hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cos-hero-visual::before {
+      content: '';
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fce4f2 0%, #fdf0e8 60%, transparent 75%);
+      z-index: 0;
+    }
+
+    .cos-hero-img {
+      position: relative;
+      z-index: 1;
+      width: 280px;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+      box-shadow: 0 20px 60px rgba(180,0,100,.18), 0 4px 20px rgba(0,0,0,.08);
+      animation: floatImg 5s ease-in-out infinite;
+    }
+
+    @keyframes floatImg {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+
+    /* cosmetics marquee */
+    .cos-marquee-wrap {
+      overflow: hidden;
+      padding: 18px 0;
+      border-top: 1px solid rgba(200,155,92,.2);
+      border-bottom: 1px solid rgba(200,155,92,.2);
+      background: rgba(255,255,255,.5);
+      margin: 0;
+    }
+
+    .cos-marquee-inner {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+      font-size: .78rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--cos-rose);
+      font-weight: 300;
+    }
+
+    .cos-marquee-inner span { white-space: nowrap; }
+    .cos-marquee-inner .dot { color: var(--cos-gold); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* cosmetics filter tabs */
+    .cos-filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: .6rem;
+      flex-wrap: wrap;
+      padding: 24px 4vw 32px;
+    }
+
+    .cos-tab {
+      padding: 7px 22px;
+      border-radius: 2px;
+      font-size: .75rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid rgba(200,155,92,.35);
+      background: transparent;
+      color: var(--text-dark);
+      font-family: 'Jost', sans-serif;
+      transition: all .25s;
+    }
+
+    .cos-tab:hover, .cos-tab.active {
+      background: var(--cos-rose);
+      border-color: var(--cos-rose);
+      color: #fff;
+    }
+
+    /* cosmetics product gallery */
+    .cos-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 28px;
+      padding: 0 6vw 80px;
+    }
+
+    .cos-item {
+      background: var(--cos-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(180,0,100,.10);
+      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s;
+      position: relative;
+      animation: fadeUp .5s both;
+    }
+
+    .cos-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(180,0,100,.16), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    .cos-item:nth-child(1)  { animation-delay: .05s; }
+    .cos-item:nth-child(2)  { animation-delay: .10s; }
+    .cos-item:nth-child(3)  { animation-delay: .15s; }
+    .cos-item:nth-child(4)  { animation-delay: .20s; }
+    .cos-item:nth-child(5)  { animation-delay: .25s; }
+    .cos-item:nth-child(6)  { animation-delay: .30s; }
+    .cos-item:nth-child(7)  { animation-delay: .35s; }
+    .cos-item:nth-child(8)  { animation-delay: .40s; }
+    .cos-item:nth-child(9)  { animation-delay: .45s; }
+    .cos-item:nth-child(10) { animation-delay: .50s; }
+    .cos-item:nth-child(11) { animation-delay: .55s; }
+    .cos-item:nth-child(12) { animation-delay: .60s; }
+
+    .cos-item-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+      background: linear-gradient(135deg, #fce4f2 0%, #fdf0e8 100%);
+    }
+
+    .cos-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s cubic-bezier(.22,1,.36,1);
+    }
+
+    .cos-item:hover img { transform: scale(1.09); }
+
+    .cos-item-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--cos-rose);
+      color: #fff;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      display: none;
+    }
+
+    .cos-item.new-in .cos-item-badge { display: block; }
+
+    .cos-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(201,0,110,.0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .3s, background .3s;
+    }
+
+    .cos-item:hover .cos-item-overlay { opacity: 1; background: rgba(201,0,110,.08); }
+
+    .cos-overlay-btn {
+      background: #fff;
+      color: var(--cos-rose);
+      padding: 9px 24px;
+      border-radius: 2px;
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      border: 1.5px solid var(--cos-rose);
+      transform: translateY(6px);
+      transition: all .3s;
+    }
+
+    .cos-item:hover .cos-overlay-btn { transform: translateY(0); }
+    .cos-overlay-btn:hover { background: var(--cos-rose); color: #fff; }
+
+    .cos-item-body {
+      padding: 16px 18px 20px;
+    }
+
+    .cos-item-cat {
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--cos-gold);
+      margin-bottom: 4px;
+    }
+
+    .cos-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      display: block;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .cos-item-name:hover { color: var(--cos-rose); }
+
+    .cos-item-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .cos-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--cos-rose);
+    }
+
+    .cos-price span {
+      font-size: .85rem;
+      font-weight: 400;
+      color: #aaa;
+      text-decoration: line-through;
+      margin-right: 5px;
+    }
+
+    .cos-stars { color: var(--cos-gold); font-size: .75rem; letter-spacing: .05em; }
+
+    .cos-add-btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 9px;
+      border: 1.5px solid rgba(200,155,92,.4);
+      border-radius: 2px;
+      background: transparent;
+      color: var(--text-dark);
+      font-family: 'Jost', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .25s;
+    }
+
+    .cos-add-btn:hover {
+      background: var(--cos-gold);
+      border-color: var(--cos-gold);
+      color: #fff;
+    }
+
+    /* cosmetics features */
+    .cos-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 60px 8vw;
+      background: rgba(255,255,255,.5);
+      border-top: 1px solid rgba(200,155,92,.15);
+      border-bottom: 1px solid rgba(200,155,92,.15);
+    }
+
+    .cos-feature { text-align: center; padding: 28px 20px; }
+    .cos-feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .cos-feature h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .cos-feature p { font-size: .8rem; color: #7a4060; font-weight: 300; line-height: 1.7; }
+
+    /* section heading for cosmetics */
+    .cos-section-head {
+      text-align: center;
+      padding: 40px 4vw 10px;
+    }
+    .cos-section-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      letter-spacing: .04em;
+    }
+    .cos-section-head h2 em { color: var(--cos-rose); font-style: italic; }
+    .cos-section-head p {
+      margin-top: .8rem;
+      font-size: .88rem;
+      font-weight: 300;
+      color: #7a4060;
+      letter-spacing: .04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .cos-hero { grid-template-columns: 1fr; min-height: auto; padding: 50px 6vw; }
+      .cos-hero-visual { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .inner-hero { height: 300px; }
+      .inner-hero-overlay { padding: 28px 24px; }
+      .collection-grid { padding: 16px 16px 40px; gap: 18px; }
+      .filter-bar { padding: 20px 16px 8px; }
+      .back-btn { margin: 20px 16px 0; }
+      .testimonial-strip { padding: 36px 16px; }
+      .features-strip { flex-direction: column; }
+      .feature-item { border-right: none; border-bottom: 1px solid var(--rose-light); }
+      .feature-item:last-child { border-bottom: none; }
+      .sandal-hero-inner { padding: 40px 20px 16px; }
+      section.grid { padding: 20px 16px 40px; gap: 20px; }
+    }
+
+    @media (max-width: 560px) {
+      .sandal-grid { padding: 0 16px 40px; }
+    }
+
+    /* ══════════════════════════════
+       LANDING / SPLASH PAGE
+    ══════════════════════════════ */
+    #page-landing {
+      min-height: 100vh;
+      position: relative;
+      background-image: url("https://i.pinimg.com/originals/42/7d/11/427d1147efc67388e9584924323ac3a7.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    #page-landing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg,rgba(10,5,15,0.58) 0%,rgba(80,20,50,0.48) 40%,rgba(10,5,20,0.68) 100%);
+      z-index: 0;
+    }
+    #page-landing::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.6) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .landing-petals {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .landing-petal {
+      position: absolute;
+      top: -40px;
+      width: 12px;
+      height: 16px;
+      background: radial-gradient(ellipse at 30% 30%, rgba(255,200,220,0.88), rgba(220,100,140,0.4));
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: petalFall linear infinite;
+      filter: blur(0.5px);
+    }
+    @keyframes petalFall {
+      0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.55; }
+      100% { transform: translateY(105vh) rotate(720deg) translateX(60px); opacity: 0; }
+    }
+    .landing-overlay {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 60px 20px;
+      text-align: center;
+      animation: fadeUp 1.2s ease both;
+    }
+    .landing-ornament {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      letter-spacing: 0.35em;
+      color: rgba(255,210,225,0.78);
+      margin-bottom: 18px;
+      animation: fadeUp 1.4s 0.15s ease both;
+      opacity: 0;
+    }
+    .landing-h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      text-shadow: 0 0 40px rgba(230,100,150,0.5), 0 2px 8px rgba(0,0,0,0.6);
+      background: linear-gradient(135deg, #fff 30%, #ffd6e8 60%, #ffaac8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeUp 1.4s 0.25s ease both;
+      opacity: 0;
+    }
+    .landing-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 20px auto 22px;
+      width: fit-content;
+      animation: fadeUp 1.4s 0.4s ease both;
+      opacity: 0;
+    }
+    .landing-divider::before, .landing-divider::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,210,225,0.7), transparent);
+    }
+    .landing-diamond {
+      width: 8px; height: 8px;
+      background: rgba(255,180,210,0.88);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+    .landing-sub {
+      font-family: 'Jost', sans-serif;
+      font-size: clamp(0.75rem, 2vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,235,245,0.88);
+      margin-bottom: 48px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      animation: fadeUp 1.4s 0.55s ease both;
+      opacity: 0;
+    }
+    .landing-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      animation: fadeUp 1.4s 0.75s ease both;
+      opacity: 0;
+    }
+    .landing-btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: transparent;
+      color: white;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,160,200,0.6);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.35s, box-shadow 0.35s;
+      cursor: pointer;
+      background-color: transparent;
+    }
+    .landing-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #e91e63, #c2185b);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.77,0,0.18,1);
+      z-index: -1;
+    }
+    .landing-btn:hover {
+      border-color: transparent;
+      box-shadow: 0 0 30px rgba(233,30,99,0.48), 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .landing-btn:hover::before { transform: scaleX(1); }
+    .landing-btn.primary {
+      background: linear-gradient(135deg, rgba(233,30,99,0.88), rgba(194,24,91,0.88));
+      border-color: transparent;
+      box-shadow: 0 4px 24px rgba(233,30,99,0.38);
+      padding: 17px 50px;
+    }
+    .landing-badge {
+      margin-top: 52px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: rgba(255,210,225,0.55);
+      letter-spacing: 0.1em;
+      animation: fadeUp 1.4s 0.95s ease both;
+      opacity: 0;
+    }
+    .landing-badge em { color: rgba(255,180,210,0.78); font-style: normal; }
+    .landing-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 2s 1.5s ease both, bounce 2s 3s ease-in-out infinite;
+      opacity: 0;
+    }
+    .landing-scroll-hint span {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,210,225,0.6);
+    }
+    .landing-scroll-hint .l-arrow {
+      width: 18px; height: 18px;
+      border-right: 1px solid rgba(255,180,210,0.6);
+      border-bottom: 1px solid rgba(255,180,210,0.6);
+      transform: rotate(45deg);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ══════════════════════════════
+       JEWELLERY PAGE STYLES
+    ══════════════════════════════ */
+    .jwl-announce {
+      background: linear-gradient(90deg, #8b1a42, #c0436e, #8b1a42);
+      color: #fff;
+      text-align: center;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      padding: 8px 20px;
+    }
+    .jwl-hero {
+      background: linear-gradient(135deg, #fde8ef 0%, #fff 45%, #fde8ef 100%);
+      text-align: center;
+      padding: 72px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .jwl-hero::before {
+      content: '';
+      position: absolute;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, #f4b8cc, transparent 70%);
+      top: -120px; left: -80px;
+      border-radius: 50%;
+      opacity: .18;
+    }
+    .jwl-hero::after {
+      content: '';
+      position: absolute;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, #f4b8cc, transparent 70%);
+      bottom: -100px; right: -60px;
+      border-radius: 50%;
+      opacity: .18;
+    }
+    .jwl-hero-label {
+      font-size: .72rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .jwl-hero h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: #8b1a42;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .jwl-hero h2 em { font-style: italic; color: #c0436e; }
+    .jwl-hero p {
+      max-width: 480px;
+      margin: 0 auto 28px;
+      font-size: .95rem;
+      color: #6b3452;
+      line-height: 1.7;
+      font-weight: 300;
+      position: relative;
+      z-index: 1;
+    }
+    .jwl-section-title {
+      text-align: center;
+      padding: 40px 20px 8px;
+    }
+    .jwl-section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
+      color: #8b1a42;
+    }
+    .jwl-section-title p {
+      font-size: .82rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-top: 6px;
+    }
+    .jwl-title-line {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a96e, transparent);
+      margin: 12px auto 0;
+    }
+    .jwl-collection {
+      padding: 32px 48px 48px;
+    }
+    .jwl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 28px;
+    }
+    .jwl-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(139,26,66,.07);
+      transition: transform .28s, box-shadow .28s;
+      position: relative;
+      animation: fadeUp .5s ease both;
+    }
+    .jwl-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(139,26,66,.14); }
+    .jwl-card:nth-child(1) { animation-delay:.05s; }
+    .jwl-card:nth-child(2) { animation-delay:.12s; }
+    .jwl-card:nth-child(3) { animation-delay:.19s; }
+    .jwl-card:nth-child(4) { animation-delay:.26s; }
+    .jwl-card:nth-child(5) { animation-delay:.33s; }
+    .jwl-card:nth-child(6) { animation-delay:.40s; }
+    .jwl-card:nth-child(7) { animation-delay:.47s; }
+    .jwl-card:nth-child(8) { animation-delay:.54s; }
+    .jwl-card:nth-child(9) { animation-delay:.61s; }
+    .jwl-card:nth-child(10) { animation-delay:.68s; }
+    .jwl-card-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: linear-gradient(135deg, #c0436e, #8b1a42);
+      color: #fff;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+    .jwl-card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: #fde8ef;
+      transition: transform .5s ease;
+    }
+    .jwl-card:hover .jwl-card-img { transform: scale(1.07); }
+    .jwl-card-body {
+      padding: 16px 18px 20px;
+      background: linear-gradient(180deg, #fff 0%, #fff9fb 100%);
+    }
+    .jwl-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #2a0d1a;
+      margin-bottom: 4px;
+    }
+    .jwl-card-sub {
+      font-size: .74rem;
+      color: #6b3452;
+      letter-spacing: .06em;
+      margin-bottom: 12px;
+    }
+    .jwl-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .jwl-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: #8b1a42;
+      font-weight: 600;
+    }
+    .jwl-card-btn {
+      font-family: 'Jost', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #c0436e;
+      border: 1px solid #f4b8cc;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .jwl-card-btn:hover { background: #c0436e; color: #fff; border-color: #c0436e; }
+    .jwl-features {
+      background: linear-gradient(135deg, #8b1a42 0%, #c0436e 100%);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .jwl-feat-item {
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+      padding: 32px 20px;
+      border-right: 1px solid rgba(255,255,255,.15);
+      color: #fff;
+    }
+    .jwl-feat-item:last-child { border-right: none; }
+    .jwl-feat-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .jwl-feat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .jwl-feat-desc { font-size: .74rem; opacity: .8; letter-spacing: .05em; line-height: 1.5; }
+    .jwl-contact {
+      background: #fff;
+      padding: 60px 48px;
+    }
+    .jwl-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 680px) {
+      .jwl-contact-grid { grid-template-columns: 1fr; }
+      .jwl-collection { padding: 24px 16px 40px; }
+    }
+    .jwl-contact-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: #8b1a42;
+      margin-bottom: 18px;
+    }
+    .jwl-contact-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .jwl-contact-icon {
+      width: 40px; height: 40px;
+      background: #fde8ef;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .jwl-contact-text strong {
+      display: block;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 3px;
+    }
+    .jwl-contact-text span {
+      font-size: .9rem;
+      color: #6b3452;
+      line-height: 1.5;
+    }
+    .jwl-contact-form h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: #8b1a42;
+      margin-bottom: 18px;
+    }
+    .jwl-form-group { margin-bottom: 16px; }
+    .jwl-form-group input, .jwl-form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #f4b8cc;
+      border-radius: 10px;
+      font-family: 'Jost', sans-serif;
+      font-size: .88rem;
+      color: #2a0d1a;
+      background: #fdf6f9;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .jwl-form-group input:focus, .jwl-form-group textarea:focus { border-color: #c0436e; }
+    .jwl-form-group textarea { height: 100px; resize: vertical; }
+    .jwl-btn-submit {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #c0436e, #8b1a42);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Jost', sans-serif;
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+    }
+    .jwl-btn-submit:hover { opacity: .9; transform: translateY(-1px); }
+    .jwl-ornament {
+      text-align: center;
+      color: #c9a96e;
+      font-size: 1.4rem;
+      letter-spacing: .5em;
+      padding: 20px 0 6px;
+      opacity: .7;
+    }
+  </style>
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     PAGE: HOME
+     ════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="banner-strip">
+    Free Shipping on Orders Above ₹2,999
+    <span>✦</span>
+    Exclusive Bridal Collections
+    <span>✦</span>
+    Trusted by 10,000+ Brides
+  </div>
+
+  <header>
+    <div class="header-badge">Est. 2020 · Tasgaon, Maharashtra</div>
+    <h1>Bridal <em>Bliss</em> Shop</h1>
+    <p>Your one-stop destination for bridal elegance</p>
+    <nav>
+      <a onclick="showPage('landing')">✦ Welcome</a>
+      <a onclick="showPage('jewellery')">Jewellery</a>
+      <a onclick="scrollToSection('cosmetics-home')">Cosmetics</a>
+      <a onclick="scrollToSection('sandals-home')">Sandals</a>
+      <a onclick="scrollToSection('makeup-kit')">Makeup Kit</a>
+      <a onclick="showPage('dress')">Dress</a>
+      <a onclick="showPage('lehenga')">Lehenga</a>
+      <a onclick="showPage('saree')">Saree</a>
+    </nav>
+  </header>
+
+  <div class="divider">
+    <span>Our Collections</span>
+  </div>
+
+  <section class="grid">
+
+    <div class="product" id="jewellery">
+      <div class="product-img-wrap">
+        <span class="product-tag">New Arrival</span>
+        <img src="https://radhejewellery.in/cdn/shop/files/RJBR-41_1_2048x2048.jpg?v=1696326857" alt="Bridal Jewellery">
+      </div>
+      <div class="product-body">
+        <p class="product-sub">Ornaments & Sets</p>
+        <h3>Bridal Jewellery</h3>
+        <button class="btn" onclick="showPage('jewellery')">Explore →</button>
+      </div>
+    </div>
+
+    <div class="product" id="cosmetics-home">
+      <div class="product-img-wrap">
+        <span class="product-tag">Bestseller</span>
+        <img src="https://purelycelebrations.com/wp-content/uploads/2026/01/bridal-makeup-flat-lay-cosmetics.png" alt="Cosmetics">
+      </div>
+      <div class="product-body">
+        <p class="product-sub">Skincare & Beauty</p>
+        <h3>Cosmetics</h3>
+        <button class="btn" onclick="showPage('cosmetics')">Explore →</button>
+      </div>
+    </div>
+
+    <div class="product" id="sandals-home">
+      <div class="product-img-wrap">
+        <span class="product-tag">Trending</span>
+        <img src="https://images.laceandfavour.com/_cache/_products/1700x1700/perfect-bridal-alexa-dyeable-ivory-satin-embellished-block-heel-sandals.jpg" alt="Sandals">
+      </div>
+      <div class="product-body">
+        <p class="product-sub">Footwear</p>
+        <h3>Sandals</h3>
+        <button class="btn" onclick="showPage('sandals')">Explore →</button>
+      </div>
+    </div>
+
+    <div class="product" id="makeup-kit">
+      <div class="product-img-wrap">
+        <span class="product-tag">Complete Kit</span>
+        <img src="http://rukmini1.flixcart.com/image/300/300/xif0q/makeup-kit/9/i/i/17-bridal-essentials-all-in-one-waterproof-makeup-kit-full-set-original-imahc8fh8xtmzhxp.jpeg" alt="Makeup Kit">
+      </div>
+      <div class="product-body">
+        <p class="product-sub">All-in-One</p>
+        <h3>Makeup Kit</h3>
+        <a href="#" class="btn">Shop Now</a>
+      </div>
+    </div>
+
+    <div class="product" id="dress">
+      <div class="product-img-wrap">
+        <span class="product-tag">Featured</span>
+        <img src="https://images.shaadisaga.com/shaadisaga_production/photos/pictures/000/847/527/new_large/martilianabridal.jpg?1557407631" alt="Bridal Dress">
+      </div>
+      <div class="product-body">
+        <p class="product-sub">Western & Fusion</p>
+        <h3>Bridal Dress</h3>
+        <button class="btn" onclick="showPage('dress')">Explore →</button>
+      </div>
+    </div>
+
+    <div class="product" id="lehenga">
+      <div class="product-img-wrap">
+        <span class="product-tag">Exclusive</span>
+        <img src="https://assets2.andaazfashion.com/media/catalog/product/cache/1/image/a12781a7f2ccb3d663f7fd01e1bd2e4e/r/a/rani-pink-silk-embroidered-bridal-lehenga-llcv113297-1.jpg" alt="Lehenga">
+      </div>
+      <div class="product-body">
+        <p class="product-sub">Traditional Wear</p>
+        <h3>Lehenga</h3>
+        <button class="btn" onclick="showPage('lehenga')">Explore →</button>
+      </div>
+    </div>
+
+    <div class="product" id="saree">
+      <div class="product-img-wrap">
+        <span class="product-tag">Classic</span>
+        <img src="https://i.pinimg.com/originals/89/9a/d5/899ad5c2762acd5e09df85e393730609.jpg" alt="Saree">
+      </div>
+      <div class="product-body">
+        <p class="product-sub">Silk & Embroidered</p>
+        <h3>Saree</h3>
+        <button class="btn" onclick="showPage('saree')">Explore →</button>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-name">Bridal Bliss Shop</div>
+    <p>
+      <a href="tel:+919876543210">+91-9876543210</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:bridalbliss@example.com">bridalbliss@example.com</a>
+    </p>
+    <p>Bridal Bliss Shop, Main Market Road, Tasgaon, Maharashtra, India</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">&copy; 2026 Bridal Bliss Shop · All Rights Reserved</p>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PAGE: SANDALS
+     ════════════════════════════════════════ -->
+<div class="page" id="page-sandals">
+
+  <div class="banner-strip">
+    Free Gift Wrapping on Orders Above ₹2,000 <span>✦</span> Bridal Footwear Collection <span>✦</span> Handcrafted Elegance
+  </div>
+
+  <header>
+    <div class="header-badge">Est. 2020 · Tasgaon, Maharashtra</div>
+    <h1>Bridal <em>Bliss</em> Shop</h1>
+    <p>Your one-stop destination for bridal elegance</p>
+    <nav>
+      <a onclick="showPage('landing')">✦ Welcome</a>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('jewellery')">Jewellery</a>
+      <a onclick="showPage('cosmetics')">Cosmetics</a>
+      <a class="active">Sandals</a>
+      <a onclick="showPage('dress')">Dress</a>
+      <a onclick="showPage('lehenga')">Lehenga</a>
+      <a onclick="showPage('saree')">Saree</a>
+    </nav>
+  </header>
+
+  <!-- Sandal Hero -->
+  <div class="sandal-hero">
+    <div class="sandal-hero-inner">
+      <h2>✨ Bridal <em>Sandal</em> Collection ✨</h2>
+      <p class="tagline">Handcrafted elegance · Every step a memory</p>
+    </div>
+  </div>
+
+  <!-- HEELS SECTION -->
+  <div class="band" id="sandal-heels">
+    <div class="sec-label">
+      <div class="eyebrow">
+        <span class="eyebrow-line"></span>
+        👠 Bridal Heels
+        <span class="eyebrow-line r"></span>
+      </div>
+      <h2>Elevated Elegance</h2>
+      <p>Stunning heels crafted for your most cherished moments</p>
+    </div>
+    <div class="sandal-grid">
+
+      <div class="sandal-card">
+        <span class="sandal-badge">Bestseller</span>
+        <div class="sandal-img-wrap">
+          <img src="https://i.pinimg.com/originals/21/6f/85/216f851590c2e84862e1ba326bd53c14.jpg" alt="Golden Bridal Sandal">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Golden Bridal Heel</div>
+          <div class="sandal-meta">Gold · Stiletto · Embellished</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹2,499</span>
+            <a href="https://example.com/sandal1" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <span class="sandal-badge">New</span>
+        <div class="sandal-img-wrap">
+          <img src="https://th.bing.com/th/id/R.15af959b83f0f816468ee8d59397b372?rik=rTTFcIFu7QOHgg&riu=http%3a%2f%2fwww.dhresource.com%2f0x0s%2ff2-albu-g3-M01-EF-DB-rBVaHVRTl4WAJy0ZAAN-43iFwZs475.jpg%2frose-gold-glittered-heel-real-wedding-shoes.jpg&ehk=GOPVn3MXrB%2fHkN5Z8UD%2bikg6YoEY%2bpzLxyFwa6mBZSE%3d&risl=&pid=ImgRaw&r=0" alt="Rose Gold Heel">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Rose Gold Glitter Heel</div>
+          <div class="sandal-meta">Rose Gold · Block Heel · Glitter</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹2,199</span>
+            <a href="https://example.com/sandal3" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <span class="sandal-badge">Trending</span>
+        <div class="sandal-img-wrap">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.qZZKxaSsvnpKLWvFL-KoNwHaJQ?pid=ImgDet&w=474&h=592&rs=1&o=7&rm=3" onerror="this.src='https://i.pinimg.com/originals/21/6f/85/216f851590c2e84862e1ba326bd53c14.jpg'" alt="Ivory Pearl Heel">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Ivory Pearl Heel</div>
+          <div class="sandal-meta">Ivory · Kitten Heel · Pearl</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹1,999</span>
+            <a href="https://example.com/sandal5" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <div class="sandal-img-wrap">
+          <img src="https://images.laceandfavour.com/_cache/_products/728x728/perfect-bridal-blair-ivory-satin-crystal-embellished-cross-strap-block-heel-sandals-pair-model-2.jpg" onerror="this.src='https://th.bing.com/th/id/R.15af959b83f0f816468ee8d59397b372?rik=rTTFcIFu7QOHgg&riu=http%3a%2f%2fwww.dhresource.com%2f0x0s%2ff2-albu-g3-M01-EF-DB-rBVaHVRTl4WAJy0ZAAN-43iFwZs475.jpg%2frose-gold-glittered-heel-real-wedding-shoes.jpg&ehk=GOPVn3MXrB%2fHkN5Z8UD%2bikg6YoEY%2bpzLxyFwa6mBZSE%3d&risl=&pid=ImgRaw&r=0'" alt="Silver Stiletto">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Silver Crystal Stiletto</div>
+          <div class="sandal-meta">Silver · Stiletto · Crystal</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹2,799</span>
+            <a href="https://example.com/sandal6" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sandal Promo Banner -->
+  <div class="sandal-promo">
+    <h3>💍 Free Gift Wrapping on All Orders Above ₹2,000</h3>
+    <p>Make your bridal look complete — shop the full collection</p>
+    <button class="sandal-promo-btn" onclick="document.getElementById('sandal-flats').scrollIntoView({behavior:'smooth'})">Shop Flats</button>
+  </div>
+
+  <!-- FLATS SECTION -->
+  <div class="band" id="sandal-flats">
+    <div class="sec-label">
+      <div class="eyebrow">
+        <span class="eyebrow-line"></span>
+        🩰 Bridal Flats
+        <span class="eyebrow-line r"></span>
+      </div>
+      <h2>Graceful & Comfortable</h2>
+      <p>Dance all night with comfort that never sacrifices style</p>
+    </div>
+    <div class="sandal-grid">
+
+      <div class="sandal-card">
+        <span class="sandal-badge">Bestseller</span>
+        <div class="sandal-img-wrap">
+          <img src="https://tse3.mm.bing.net/th/id/OIP.Ao_cY_HhqwdnotLHfcxbtAHaLH?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Rose Flat Sandal">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Rose Flat Sandal</div>
+          <div class="sandal-meta">Blush Pink · Flat · Floral</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹1,699</span>
+            <a href="https://example.com/sandal4" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <span class="sandal-badge">New</span>
+        <div class="sandal-img-wrap">
+          <img src="https://th.bing.com/th/id/R.f706da2d07597589acf93505ea829697?rik=1Qr9lbMXb3pWFw&riu=http%3a%2f%2fwww.kaileep.com%2fcdn%2fshop%2fcollections%2fBridal_Flats_-_The_Bella_1.jpg%3fv%3d1763404957&ehk=eBGP0wXPN2UxU7AIUKPcnljKNulfZOwvPf%2byB6ABIHo%3d&risl=&pid=ImgRaw&r=0" alt="Silver Flat">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Silver Flat Sandal</div>
+          <div class="sandal-meta">Silver · Flat · Pearl Strap</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹1,499</span>
+            <a href="https://example.com/sandal2" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <div class="sandal-img-wrap">
+          <img src="https://i.pinimg.com/736x/b7/b3/e5/b7b3e5c800e52676ad7e5d5887466953.jpg" alt="Gold Flat">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Gold Kolhapuri Flat</div>
+          <div class="sandal-meta">Gold · Flat · Traditional</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹1,299</span>
+            <a href="https://example.com/sandal7" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <span class="sandal-badge">Sale</span>
+        <div class="sandal-img-wrap">
+          <img src="https://i.pinimg.com/originals/2e/54/62/2e5462c590016a2216a0d7c11d7b98d8.jpg" alt="Embroidered Flat">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Embroidered Flat</div>
+          <div class="sandal-meta">White · Flat · Hand Embroidered</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹1,199</span>
+            <a href="https://example.com/sandal8" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EMBELLISHED SECTION -->
+  <div class="band" id="sandal-embellished">
+    <div class="sec-label">
+      <div class="eyebrow">
+        <span class="eyebrow-line"></span>
+        💎 Embellished Collection
+        <span class="eyebrow-line r"></span>
+      </div>
+      <h2>Jewel of the Occasion</h2>
+      <p>Encrusted with crystals, pearls & hand-set stones</p>
+    </div>
+    <div class="sandal-grid">
+
+      <div class="sandal-card">
+        <span class="sandal-badge">Exclusive</span>
+        <div class="sandal-img-wrap">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.0vgSAjeMNRbu_0TUCbZLQgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Diamond Studded">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Diamond-Cut Sandal</div>
+          <div class="sandal-meta">Gold · Crystal · Luxury</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹3,499</span>
+            <a href="https://example.com/sandal9" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <span class="sandal-badge">Trending</span>
+        <div class="sandal-img-wrap">
+          <img src="https://i.etsystatic.com/15503374/c/2000/2000/378/0/il/908d8a/1888996848/il_800x800.1888996848_cdq9.jpg" alt="Kundan Bridal Sandal">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Kundan Bridal Sandal</div>
+          <div class="sandal-meta">Rose Gold · Kundan · Bridal</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹2,899</span>
+            <a href="https://example.com/sandal10" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <div class="sandal-img-wrap">
+          <img src="https://i.etsystatic.com/15503374/c/2000/2000/378/0/il/908d8a/1888996848/il_800x800.1888996848_cdq9.jpg" alt="Pearl Encrusted">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Pearl Encrusted Mule</div>
+          <div class="sandal-meta">Ivory · Pearl · Mule</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹2,599</span>
+            <a href="https://example.com/sandal11" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <span class="sandal-badge">Limited</span>
+        <div class="sandal-img-wrap">
+          <img src="https://i.pinimg.com/originals/40/a3/b2/40a3b2b09fcdf2ffe6db4a7faa532ccf.jpg" alt="Floral Stone Sandal">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Floral Stone Sandal</div>
+          <div class="sandal-meta">Pink · Stone Work · Flat</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹1,999</span>
+            <a href="https://example.com/sandal12" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <div class="sandal-img-wrap">
+          <img src="https://i.pinimg.com/originals/21/6f/85/216f851590c2e84862e1ba326bd53c14.jpg" alt="Mehndi Special Sandal">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Mehndi Special Sandal</div>
+          <div class="sandal-meta">Green-Gold · Flat · Festive</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹1,599</span>
+            <a href="https://example.com/sandal13" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sandal-card">
+        <span class="sandal-badge">New</span>
+        <div class="sandal-img-wrap">
+          <img src="https://th.bing.com/th/id/R.15af959b83f0f816468ee8d59397b372?rik=rTTFcIFu7QOHgg&riu=http%3a%2f%2fwww.dhresource.com%2f0x0s%2ff2-albu-g3-M01-EF-DB-rBVaHVRTl4WAJy0ZAAN-43iFwZs475.jpg%2frose-gold-glittered-heel-real-wedding-shoes.jpg&ehk=GOPVn3MXrB%2fHkN5Z8UD%2bikg6YoEY%2bpzLxyFwa6mBZSE%3d&risl=&pid=ImgRaw&r=0" alt="Crystal Block Heel">
+        </div>
+        <div class="sandal-body">
+          <div class="sandal-name">Crystal Block Heel</div>
+          <div class="sandal-meta">Champagne · Block · Crystal</div>
+          <div class="sandal-footer">
+            <span class="sandal-price">₹3,199</span>
+            <a href="https://example.com/sandal14" class="sandal-buy-btn">Buy Now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-name">Bridal Bliss Shop</div>
+    <p><a href="tel:+919876543210">+91-9876543210</a> &nbsp;·&nbsp; <a href="mailto:bridalbliss@example.com">bridalbliss@example.com</a></p>
+    <p>Bridal Bliss Shop, Main Market Road, Tasgaon, Maharashtra, India</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">&copy; 2026 Bridal Bliss Shop · All Rights Reserved</p>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PAGE: COSMETICS
+     ════════════════════════════════════════ -->
+<div class="page" id="page-cosmetics">
+
+  <div class="cos-announce">✦ FREE SHIPPING ON ORDERS ABOVE ₹999 &nbsp;|&nbsp; USE CODE GLAM20 FOR 20% OFF ✦</div>
+
+  <header>
+    <div class="header-badge">Est. 2020 · Tasgaon, Maharashtra</div>
+    <h1>Bridal <em>Bliss</em> Shop</h1>
+    <p>Your one-stop destination for bridal elegance</p>
+    <nav>
+      <a onclick="showPage('landing')">✦ Welcome</a>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('jewellery')">Jewellery</a>
+      <a class="active">Cosmetics</a>
+      <a onclick="showPage('sandals')">Sandals</a>
+      <a onclick="showPage('dress')">Dress</a>
+      <a onclick="showPage('lehenga')">Lehenga</a>
+      <a onclick="showPage('saree')">Saree</a>
+    </nav>
+  </header>
+
+  <!-- Cosmetics Hero -->
+  <section class="cos-hero">
+    <div class="cos-hero-text">
+      <h2>Beauty is<br>an <em>Art.</em><br>Wear it.</h2>
+      <p class="cos-hero-subtitle">
+        Curated luxury cosmetics crafted for the modern woman. Ethically sourced, dermatologist‑tested, and timelessly elegant.
+      </p>
+      <div class="cos-hero-badges">
+        <div class="cos-badge"><div class="num">200+</div><div class="lbl">Products</div></div>
+        <div class="cos-badge-sep"></div>
+        <div class="cos-badge"><div class="num">50k+</div><div class="lbl">Happy Clients</div></div>
+        <div class="cos-badge-sep"></div>
+        <div class="cos-badge"><div class="num">4.9★</div><div class="lbl">Rating</div></div>
+      </div>
+    </div>
+    <div class="cos-hero-visual">
+      <img class="cos-hero-img" src="https://cdn.pixabay.com/photo/2023/06/01/06/21/perfume-8032808_1280.jpg" alt="Featured Cosmetic">
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="cos-marquee-wrap">
+    <div class="cos-marquee-inner">
+      <span>Cruelty Free</span><span class="dot">✦</span>
+      <span>Vegan Formulas</span><span class="dot">✦</span>
+      <span>Dermatologist Tested</span><span class="dot">✦</span>
+      <span>100% Authentic</span><span class="dot">✦</span>
+      <span>Luxury Packaging</span><span class="dot">✦</span>
+      <span>Free Returns</span><span class="dot">✦</span>
+      <span>Cruelty Free</span><span class="dot">✦</span>
+      <span>Vegan Formulas</span><span class="dot">✦</span>
+      <span>Dermatologist Tested</span><span class="dot">✦</span>
+      <span>100% Authentic</span><span class="dot">✦</span>
+      <span>Luxury Packaging</span><span class="dot">✦</span>
+      <span>Free Returns</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- Shop Section -->
+  <div class="cos-section-head">
+    <h2>Our <em>Bestsellers</em></h2>
+    <p>Handpicked favourites loved by thousands of beauty enthusiasts</p>
+  </div>
+
+  <div class="cos-filter-tabs">
+    <button class="cos-tab active">All</button>
+    <button class="cos-tab">Face</button>
+    <button class="cos-tab">Eyes</button>
+    <button class="cos-tab">Lips</button>
+    <button class="cos-tab">Skin</button>
+    <button class="cos-tab">Fragrance</button>
+  </div>
+
+  <div class="cos-gallery">
+
+    <div class="cos-item new-in">
+      <div class="cos-item-img-wrap">
+        <div class="cos-item-badge">New</div>
+        <img src="https://th.bing.com/th/id/OIP.63PxZBQR9y1qxh-Q9km5jgHaE7?w=206&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Lipstick">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Lips</div>
+        <span class="cos-item-name">Velvet Matte Lipstick</span>
+        <div class="cos-item-meta">
+          <div class="cos-price"><span>₹899</span>₹649</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://www.makeupforever.ae/on/demandware.static/-/Sites-mufe-master-catalog/default/dwd209a67c/hi-res/HDSKIN/Visual-3-optimized.jpg" alt="Foundation">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Face</div>
+        <span class="cos-item-name">HD Skin Foundation</span>
+        <div class="cos-item-meta">
+          <div class="cos-price"><span>₹2199</span>₹1799</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://th.bing.com/th/id/OIP.ixpgWH5e9fcHQRzC6jyFYQHaFj?w=196&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Mascara">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Eyes</div>
+        <span class="cos-item-name">Volume Rush Mascara</span>
+        <div class="cos-item-meta">
+          <div class="cos-price">₹549</div>
+          <div class="cos-stars">★★★★☆</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item new-in">
+      <div class="cos-item-img-wrap">
+        <div class="cos-item-badge">New</div>
+        <img src="https://th.bing.com/th/id/OIP.Gq_HRkOEBDLTnePfGSOX9gHaFK?w=285&h=198&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Blush">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Face</div>
+        <span class="cos-item-name">Satin Blush Duo</span>
+        <div class="cos-item-meta">
+          <div class="cos-price">₹749</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://tse1.explicit.bing.net/th/id/OIP.VX-e0Fg4837fEXt-PyBB5QHaFD?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Eyeshadow">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Eyes</div>
+        <span class="cos-item-name">Eyeshadow Palette 18P</span>
+        <div class="cos-item-meta">
+          <div class="cos-price"><span>₹1499</span>₹999</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://th.bing.com/th/id/OIP.Xbd0cb2t3hHczVt_nMFRcgHaHa?w=187&h=187&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Highlighter">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Face</div>
+        <span class="cos-item-name">Glow Highlighter</span>
+        <div class="cos-item-meta">
+          <div class="cos-price">₹699</div>
+          <div class="cos-stars">★★★★☆</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.3KRUpE0esFUmqchnOokEgAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Concealer">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Face</div>
+        <span class="cos-item-name">Full Cover Concealer</span>
+        <div class="cos-item-meta">
+          <div class="cos-price">₹499</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://tse1.explicit.bing.net/th/id/OIP.z_CTuUtGvLi4N0ql52df4gHaFF?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Lip Gloss">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Lips</div>
+        <span class="cos-item-name">Juicy Lip Gloss</span>
+        <div class="cos-item-meta">
+          <div class="cos-price">₹399</div>
+          <div class="cos-stars">★★★★☆</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://th.bing.com/th/id/OIP.6AqotjLh5L7oiurmpGj4XAHaFj?w=244&h=183&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Setting Spray">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Face</div>
+        <span class="cos-item-name">Long‑Wear Setting Spray</span>
+        <div class="cos-item-meta">
+          <div class="cos-price"><span>₹999</span>₹749</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item new-in">
+      <div class="cos-item-img-wrap">
+        <div class="cos-item-badge">New</div>
+        <img src="https://media6.ppl-media.com/tr:h-235,w-235,c-at_max,l-image,i-@@mediafiles@@mailers@@banners@@1659451450_new-tag.png,w-115,lfo-top_right,l-end,dpr-2/static/img/product/353619/faces-canada-weightless-stay-matte-compact-natural-02-9g-66_1_display_1708514487_02632926.jpg" alt="Compact Powder">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Face</div>
+        <span class="cos-item-name">Matte Compact Powder</span>
+        <div class="cos-item-meta">
+          <div class="cos-price">₹599</div>
+          <div class="cos-stars">★★★★☆</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://ie.givemecosmetics.com/cdn/shop/files/anti-ageing-makeup-remover-eco-makeup-pad-bundlefacial-cleansers-782832.jpg?v=1713970103" alt="Makeup Remover">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Skin</div>
+        <span class="cos-item-name">Gentle Makeup Remover</span>
+        <div class="cos-item-meta">
+          <div class="cos-price">₹449</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cos-item">
+      <div class="cos-item-img-wrap">
+        <img src="https://cdn.pixabay.com/photo/2023/06/01/06/21/perfume-8032808_1280.jpg" alt="Perfume">
+        <div class="cos-item-overlay"><a class="cos-overlay-btn" href="#">Quick View</a></div>
+      </div>
+      <div class="cos-item-body">
+        <div class="cos-item-cat">Fragrance</div>
+        <span class="cos-item-name">Rose Oud Perfume</span>
+        <div class="cos-item-meta">
+          <div class="cos-price"><span>₹3499</span>₹2799</div>
+          <div class="cos-stars">★★★★★</div>
+        </div>
+        <button class="cos-add-btn">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Cosmetics Features -->
+  <div class="cos-features">
+    <div class="cos-feature">
+      <div class="cos-feature-icon">🌿</div>
+      <h3>Clean Beauty</h3>
+      <p>Free from parabens, sulphates, and harmful chemicals. Safe for all skin types.</p>
+    </div>
+    <div class="cos-feature">
+      <div class="cos-feature-icon">🐰</div>
+      <h3>Cruelty Free</h3>
+      <p>Every product is certified cruelty‑free and never tested on animals.</p>
+    </div>
+    <div class="cos-feature">
+      <div class="cos-feature-icon">🚚</div>
+      <h3>Fast Delivery</h3>
+      <p>Free shipping on orders above ₹999. Express delivery available.</p>
+    </div>
+    <div class="cos-feature">
+      <div class="cos-feature-icon">↩️</div>
+      <h3>Easy Returns</h3>
+      <p>Not satisfied? Return within 30 days — no questions asked.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-name">Bridal Bliss Shop</div>
+    <p><a href="tel:+919876543210">+91-9876543210</a> &nbsp;·&nbsp; <a href="mailto:bridalbliss@example.com">bridalbliss@example.com</a></p>
+    <p>Bridal Bliss Shop, Main Market Road, Tasgaon, Maharashtra, India</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">&copy; 2026 Bridal Bliss Shop · All Rights Reserved</p>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PAGE: SAREE
+     ════════════════════════════════════════ -->
+<div class="page" id="page-saree">
+
+  <div class="banner-strip">
+    Free Shipping on Orders Above ₹2,999 <span>✦</span> Exclusive Bridal Collections <span>✦</span> Trusted by 10,000+ Brides
+  </div>
+
+  <header>
+    <div class="header-badge">Est. 2020 · Tasgaon, Maharashtra</div>
+    <h1>Bridal <em>Bliss</em> Shop</h1>
+    <p>Your one-stop destination for bridal elegance</p>
+    <nav>
+      <a onclick="showPage('landing')">✦ Welcome</a>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('jewellery')">Jewellery</a>
+      <a onclick="showPage('cosmetics')">Cosmetics</a>
+      <a onclick="showPage('sandals')">Sandals</a>
+      <a onclick="showPage('dress')">Dress</a>
+      <a onclick="showPage('lehenga')">Lehenga</a>
+      <a class="active">Saree</a>
+    </nav>
+  </header>
+
+  <div class="inner-hero">
+    <img src="https://www.bing.com/th/id/OIP.hjSgphU6Dz1DEhzn5R1azgHaJQ?w=162&h=211&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="Bridal Saree Collection">
+    <div class="inner-hero-overlay">
+      <span class="badge">Silk · Embroidered · Banarasi</span>
+      <h2>Bridal <em>Saree</em> Collection</h2>
+      <p>Timeless drapes for the most beautiful day of your life</p>
+    </div>
+  </div>
+
+  <div class="features-strip">
+    <div class="feature-item"><div class="feature-icon">🕊️</div><h4>Pure Silk</h4><p>Authentic silk weaves</p></div>
+    <div class="feature-item"><div class="feature-icon">✨</div><h4>Zari Embroidery</h4><p>Handcrafted gold borders</p></div>
+    <div class="feature-item"><div class="feature-icon">📦</div><h4>Free Blouse</h4><p>Matching blouse piece included</p></div>
+    <div class="feature-item"><div class="feature-icon">🚚</div><h4>Fast Delivery</h4><p>Within 3–5 business days</p></div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active">All Sarees</button>
+    <button class="filter-btn">Banarasi</button>
+    <button class="filter-btn">Kanjeevaram</button>
+    <button class="filter-btn">Georgette</button>
+    <button class="filter-btn">Net Saree</button>
+    <button class="filter-btn">Chiffon</button>
+  </div>
+
+  <div class="section-heading">
+    <p class="sh-sub">Curated for You</p>
+    <h2>Our Finest <em>Saree</em> Picks</h2>
+  </div>
+
+  <div class="collection-grid">
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Bestseller</span>
+        <img src="https://i.pinimg.com/originals/89/9a/d5/899ad5c2762acd5e09df85e393730609.jpg" alt="Red Banarasi Silk Saree">
+        <span class="cc-price">₹8,499</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Banarasi · Pure Silk</p>
+        <h3>Red Banarasi Silk Saree</h3>
+        <p>Luxurious red Banarasi silk with intricate gold zari work and a rich pallu — perfect for the wedding ceremony.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">New Arrival</span>
+        <img src="https://th.bing.com/th/id/OIP.0iW0NbpIvSDaN9vLeOMZcQHaJ3?w=203&h=271&c=7&r=0&o=7&pid=1.7&rm=3" alt="Pink Kanjeevaram Saree">
+        <span class="cc-price">₹12,999</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Kanjeevaram · Temple Border</p>
+        <h3>Pink Kanjeevaram Saree</h3>
+        <p>Vibrant pink Kanjeevaram with contrast temple border and peacock motifs woven in pure gold thread.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Exclusive</span>
+        <img src="https://www.bing.com/th/id/OIP.IiIEEecnSlpM1Tj7oc-VvwHaIm?w=174&h=211&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="Royal Blue Georgette Saree">
+        <span class="cc-price">₹6,799</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Georgette · Embroidered</p>
+        <h3>Royal Blue Georgette Saree</h3>
+        <p>Lightweight georgette with heavy embroidery all over — ideal for sangeet and reception functions.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Classic</span>
+        <img src="https://th.bing.com/th/id/OIP.jNbzxo0_6cDvQMycmtDz9AHaJ4?w=203&h=271&c=7&r=0&o=7&pid=1.7&rm=3" alt="Golden Tissue Saree">
+        <span class="cc-price">₹9,299</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Tissue Silk · Zari Weave</p>
+        <h3>Golden Tissue Silk Saree</h3>
+        <p>A resplendent golden tissue saree with fine zari weave and a scalloped embroidered border that glows under lights.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Trending</span>
+        <img src="https://th.bing.com/th/id/OIP.XGbRak8LRkLxMmo3N0INBAHaIq?w=203&h=237&c=7&r=0&o=7&pid=1.7&rm=3" alt="Maroon Net Saree">
+        <span class="cc-price">₹7,499</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Net · Sequin & Stone Work</p>
+        <h3>Maroon Net Bridal Saree</h3>
+        <p>Dramatic maroon net saree adorned with sequins, stones, and a floral embroidery border for a show-stopping look.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="testimonial-strip">
+    <p class="ts-label">What Brides Say</p>
+    <div class="divider"><span>Bride Reviews</span></div>
+    <div class="testimonials">
+      <div class="tcard"><div class="stars">★★★★★</div><p>"The Banarasi saree was exactly as shown — the fabric is exquisite and the gold zari sparkled beautifully at my wedding."</p><p class="tname">— Priya S., Pune</p></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p>"Wore the Pink Kanjeevaram for my muhurtham. Every guest complimented me. Quality is outstanding and delivery was on time!"</p><p class="tname">— Ananya R., Chennai</p></div>
+      <div class="tcard"><div class="stars">★★★★☆</div><p>"Beautiful sarees and great customer service. The blouse piece matched perfectly. Will definitely order again."</p><p class="tname">— Sneha M., Mumbai</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-name">Bridal Bliss Shop</div>
+    <p><a href="tel:+919876543210">+91-9876543210</a> &nbsp;·&nbsp; <a href="mailto:bridalbliss@example.com">bridalbliss@example.com</a></p>
+    <p>Bridal Bliss Shop, Main Market Road, Tasgaon, Maharashtra, India</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">&copy; 2026 Bridal Bliss Shop · All Rights Reserved</p>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PAGE: LEHENGA
+     ════════════════════════════════════════ -->
+<div class="page" id="page-lehenga">
+
+  <div class="banner-strip">
+    Free Shipping on Orders Above ₹2,999 <span>✦</span> Exclusive Bridal Collections <span>✦</span> Trusted by 10,000+ Brides
+  </div>
+
+  <header>
+    <div class="header-badge">Est. 2020 · Tasgaon, Maharashtra</div>
+    <h1>Bridal <em>Bliss</em> Shop</h1>
+    <p>Your one-stop destination for bridal elegance</p>
+    <nav>
+      <a onclick="showPage('landing')">✦ Welcome</a>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('jewellery')">Jewellery</a>
+      <a onclick="showPage('cosmetics')">Cosmetics</a>
+      <a onclick="showPage('sandals')">Sandals</a>
+      <a onclick="showPage('dress')">Dress</a>
+      <a class="active">Lehenga</a>
+      <a onclick="showPage('saree')">Saree</a>
+    </nav>
+  </header>
+
+  <div class="inner-hero">
+    <img src="https://assets2.andaazfashion.com/media/catalog/product/cache/1/image/a12781a7f2ccb3d663f7fd01e1bd2e4e/r/a/rani-pink-silk-embroidered-bridal-lehenga-llcv113297-1.jpg" alt="Bridal Lehenga Collection">
+    <div class="inner-hero-overlay">
+      <span class="badge">Bridal · Designer · Handcrafted</span>
+      <h2>Bridal <em>Lehenga</em> Collection</h2>
+      <p>Royal silhouettes crafted for your once-in-a-lifetime moment</p>
+    </div>
+  </div>
+
+  <div class="features-strip">
+    <div class="feature-item"><div class="feature-icon">👑</div><h4>Designer Cuts</h4><p>A-line, flared & mermaid</p></div>
+    <div class="feature-item"><div class="feature-icon">🪡</div><h4>Hand Embroidery</h4><p>Zardosi, gota & mirror work</p></div>
+    <div class="feature-item"><div class="feature-icon">👗</div><h4>3-Piece Set</h4><p>Lehenga, choli & dupatta</p></div>
+    <div class="feature-item"><div class="feature-icon">📏</div><h4>Custom Sizing</h4><p>Tailored to your measurements</p></div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active">All Lehengas</button>
+    <button class="filter-btn">Red Bridal</button>
+    <button class="filter-btn">Pastel</button>
+    <button class="filter-btn">Velvet</button>
+    <button class="filter-btn">Mirror Work</button>
+    <button class="filter-btn">Zardosi</button>
+  </div>
+
+  <div class="section-heading">
+    <p class="sh-sub">Royal Selections</p>
+    <h2>Our Finest <em>Lehenga</em> Picks</h2>
+  </div>
+
+  <div class="collection-grid">
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Most Loved</span>
+        <img src="https://assets2.andaazfashion.com/media/catalog/product/cache/1/image/a12781a7f2ccb3d663f7fd01e1bd2e4e/r/a/rani-pink-silk-embroidered-bridal-lehenga-llcv113297-1.jpg" alt="Rani Pink Silk Lehenga">
+        <span class="cc-price">₹24,999</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Silk · Zardosi Embroidery</p>
+        <h3>Rani Pink Silk Lehenga</h3>
+        <p>A stunning rani pink silk lehenga with elaborate zardosi embroidery across the skirt and a heavily worked choli.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Bestseller</span>
+        <img src="https://th.bing.com/th/id/OIP.MYe2TwDP4feAApG_Pm2CqwHaKt?w=203&h=294&c=7&r=0&o=7&pid=1.7&rm=3" alt="Red Bridal Lehenga">
+        <span class="cc-price">₹32,999</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Velvet · Stone & Sequin</p>
+        <h3>Red Velvet Bridal Lehenga</h3>
+        <p>Deep red velvet lehenga adorned with Swarovski stones and sequin embroidery — a timeless bridal classic.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">New Arrival</span>
+        <img src="https://th.bing.com/th/id/OIP.84gLA_FbhCv1-8ekEseghAHaI4?w=203&h=243&c=7&r=0&o=7&pid=1.7&rm=3" alt="Pastel Peach Lehenga">
+        <span class="cc-price">₹18,499</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Net · Floral Embroidery</p>
+        <h3>Pastel Peach Lehenga</h3>
+        <p>Soft pastel peach net lehenga with delicate floral threadwork and a mirror-work dupatta — ideal for day weddings.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Exclusive</span>
+        <img src="https://th.bing.com/th/id/OIP.d7YZIZ4zr0SGS-5JsNswVgHaKX?w=203&h=284&c=7&r=0&o=7&pid=1.7&rm=3" alt="Royal Blue Lehenga">
+        <span class="cc-price">₹27,500</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Georgette · Gota Patti</p>
+        <h3>Royal Blue Gota Patti Lehenga</h3>
+        <p>Regal royal blue georgette lehenga with intricate gota patti work and a contrast golden dupatta — fit for royalty.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Trending</span>
+        <img src="https://th.bing.com/th/id/OIP.dsYhjYkKY7cLkFlo2FSRCQHaH9?w=203&h=218&c=7&r=0&o=7&pid=1.7&rm=3" alt="Ivory Mirror Work Lehenga">
+        <span class="cc-price">₹21,999</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Silk · Mirror & Thread Work</p>
+        <h3>Ivory Mirror Work Lehenga</h3>
+        <p>Elegant ivory silk lehenga with vibrant mirror work and colourful thread embroidery — perfect for a Rajasthani-style wedding.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Premium</span>
+        <img src="https://th.bing.com/th/id/OIP.j6ckN9cA3fDNU5l5V00P3QHaLH?w=203&h=304&c=7&r=0&o=7&pid=1.7&rm=3" alt="Emerald Green Lehenga">
+        <span class="cc-price">₹29,999</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Organza · Aari Embroidery</p>
+        <h3>Emerald Green Organza Lehenga</h3>
+        <p>Rich emerald organza lehenga with aari embroidery and a layered skirt that swirls beautifully for the first dance.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="testimonial-strip">
+    <p class="ts-label">What Brides Say</p>
+    <div class="divider"><span>Bride Reviews</span></div>
+    <div class="testimonials">
+      <div class="tcard"><div class="stars">★★★★★</div><p>"I wore the Red Velvet Lehenga on my wedding day and felt like an absolute queen. The quality and craftsmanship are beyond words."</p><p class="tname">— Kavita P., Nagpur</p></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p>"The pink silk lehenga fit perfectly after customization. The team was so helpful and delivered well before the date."</p><p class="tname">— Ritu D., Aurangabad</p></div>
+      <div class="tcard"><div class="stars">★★★★☆</div><p>"Gorgeous lehengas at amazing prices. The embroidery is stunning and the colours are exactly as shown online."</p><p class="tname">— Meghna L., Kolhapur</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-name">Bridal Bliss Shop</div>
+    <p><a href="tel:+919876543210">+91-9876543210</a> &nbsp;·&nbsp; <a href="mailto:bridalbliss@example.com">bridalbliss@example.com</a></p>
+    <p>Bridal Bliss Shop, Main Market Road, Tasgaon, Maharashtra, India</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">&copy; 2026 Bridal Bliss Shop · All Rights Reserved</p>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PAGE: BRIDAL DRESS
+     ════════════════════════════════════════ -->
+<div class="page" id="page-dress">
+
+  <div class="banner-strip">
+    Free Shipping on Orders Above ₹2,999 <span>✦</span> Exclusive Bridal Collections <span>✦</span> Trusted by 10,000+ Brides
+  </div>
+
+  <header>
+    <div class="header-badge">Est. 2020 · Tasgaon, Maharashtra</div>
+    <h1>Bridal <em>Bliss</em> Shop</h1>
+    <p>Your one-stop destination for bridal elegance</p>
+    <nav>
+      <a onclick="showPage('landing')">✦ Welcome</a>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('jewellery')">Jewellery</a>
+      <a onclick="showPage('cosmetics')">Cosmetics</a>
+      <a onclick="showPage('sandals')">Sandals</a>
+      <a class="active">Dress</a>
+      <a onclick="showPage('lehenga')">Lehenga</a>
+      <a onclick="showPage('saree')">Saree</a>
+    </nav>
+  </header>
+
+  <div class="inner-hero">
+    <img src="https://images.shaadisaga.com/shaadisaga_production/photos/pictures/000/847/527/new_large/martilianabridal.jpg?1557407631" alt="Bridal Dress Collection">
+    <div class="inner-hero-overlay">
+      <span class="badge">Western · Fusion · Contemporary</span>
+      <h2>Bridal <em>Dress</em> Collection</h2>
+      <p>Modern silhouettes for the contemporary Indian bride</p>
+    </div>
+  </div>
+
+  <div class="features-strip">
+    <div class="feature-item"><div class="feature-icon">🤍</div><h4>Premium Fabrics</h4><p>Satin, lace & tulle</p></div>
+    <div class="feature-item"><div class="feature-icon">✂️</div><h4>Perfect Fit</h4><p>Custom tailoring available</p></div>
+    <div class="feature-item"><div class="feature-icon">💎</div><h4>Embellishments</h4><p>Crystals, pearls & lace</p></div>
+    <div class="feature-item"><div class="feature-icon">🌸</div><h4>All Styles</h4><p>Ball gown to mermaid</p></div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active">All Dresses</button>
+    <button class="filter-btn">Ball Gown</button>
+    <button class="filter-btn">Mermaid</button>
+    <button class="filter-btn">A-Line</button>
+    <button class="filter-btn">Indo-Western</button>
+    <button class="filter-btn">Lace</button>
+  </div>
+
+  <div class="section-heading">
+    <p class="sh-sub">Elegance Redefined</p>
+    <h2>Our Finest <em>Bridal Dress</em> Picks</h2>
+  </div>
+
+  <div class="collection-grid">
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Most Loved</span>
+        <img src="https://images.shaadisaga.com/shaadisaga_production/photos/pictures/000/847/527/new_large/martilianabridal.jpg?1557407631" alt="White Ball Gown">
+        <span class="cc-price">₹38,500</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Satin · Ball Gown</p>
+        <h3>White Satin Ball Gown</h3>
+        <p>A timeless white satin ball gown with a sweetheart neckline and cathedral train — the ultimate fairytale wedding dress.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Trending</span>
+        <img src="https://th.bing.com/th/id/OIP.IXYShgN0cTeHxtQVvBxe6AHaLH?w=203&h=304&c=7&r=0&o=7&pid=1.7&rm=3" alt="Indo-Western Gown">
+        <span class="cc-price">₹34,500</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Indo-Western · Fusion</p>
+        <h3>Gold Indo-Western Gown</h3>
+        <p>A striking fusion gown blending Indian embroidery with a modern silhouette — ideal for the contemporary bride who loves tradition with a twist.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">New Arrival</span>
+        <img src="https://th.bing.com/th/id/OIP.1ymOTt_OS4nLad6F0KsZzAHaLk?w=203&h=311&c=7&r=0&o=7&pid=1.7&rm=3" alt="Off-White Floral Dress">
+        <span class="cc-price">₹26,750</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Chiffon · Floral Appliqué</p>
+        <h3>Off-White Floral Appliqué Dress</h3>
+        <p>Light and ethereal off-white chiffon dress with 3D floral appliqué and a flowing skirt — perfect for destination weddings.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <div class="cc-img-wrap">
+        <span class="cc-tag">Bestseller</span>
+        <img src="https://th.bing.com/th/id/OPAC.eemdbcsi6ZNCYw474C474?w=144&h=192&c=17&o=5&dpr=2&pid=21.1" alt="Deep Red Velvet Dress">
+        <span class="cc-price">₹44,999</span>
+      </div>
+      <div class="cc-body">
+        <p class="cc-sub">Velvet · Crystal Embellished</p>
+        <h3>Deep Red Crystal Velvet Gown</h3>
+        <p>A bold and luxurious deep red velvet gown with hand-set crystal embellishments on the bodice and a dramatic structured skirt.</p>
+        <div class="cc-actions">
+          <button class="btn-primary">Add to Cart</button>
+          <button class="btn-outline">Wishlist ♡</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="testimonial-strip">
+    <p class="ts-label">What Brides Say</p>
+    <div class="divider"><span>Bride Reviews</span></div>
+    <div class="testimonials">
+      <div class="tcard"><div class="stars">★★★★★</div><p>"The white ball gown was breathtaking. I felt like a princess walking down the aisle. Absolutely worth every rupee!"</p><p class="tname">— Pooja T., Sangli</p></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p>"The Indo-Western gown was a showstopper at my reception. So many compliments and it was incredibly comfortable too!"</p><p class="tname">— Shreya K., Nashik</p></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p>"Ordered the blush pink gown for my court wedding. Perfect fit, fast delivery, and the quality exceeded my expectations."</p><p class="tname">— Nidhi B., Satara</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-name">Bridal Bliss Shop</div>
+    <p><a href="tel:+919876543210">+91-9876543210</a> &nbsp;·&nbsp; <a href="mailto:bridalbliss@example.com">bridalbliss@example.com</a></p>
+    <p>Bridal Bliss Shop, Main Market Road, Tasgaon, Maharashtra, India</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">&copy; 2026 Bridal Bliss Shop · All Rights Reserved</p>
+  </footer>
+</div>
+
+
+
+
+<!-- ════════════════════════════════════════
+     PAGE: LANDING / SPLASH
+     ════════════════════════════════════════ -->
+<div class="page" id="page-landing">
+  <div class="landing-petals" id="landingPetals"></div>
+
+  <div class="landing-overlay">
+    <div class="landing-ornament">✦ Est. 2020 · Luxury Bridal Couture · Tasgaon ✦</div>
+
+    <h1 class="landing-h1">Bridal Bliss</h1>
+
+    <div class="landing-divider">
+      <div class="landing-diamond"></div>
+    </div>
+
+    <p class="landing-sub">Your one-stop destination for elegant bridal wear &amp; accessories</p>
+
+    <div class="landing-btn-group">
+      <button class="landing-btn primary" onclick="showPage('home')">Explore Collection</button>
+      <button class="landing-btn" onclick="showPage('jewellery')">Jewellery</button>
+      <button class="landing-btn" onclick="showPage('sandals')">Sandals</button>
+      <button class="landing-btn" onclick="showPage('cosmetics')">Cosmetics</button>
+    </div>
+
+    <div class="landing-badge">Where every bride finds her <em>perfect moment</em></div>
+  </div>
+
+  <div class="landing-scroll-hint">
+    <span>Explore</span>
+    <div class="l-arrow"></div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     PAGE: JEWELLERY (Lumière Jewels)
+     ════════════════════════════════════════ -->
+<div class="page" id="page-jewellery">
+
+  <div class="jwl-announce">✦ Free shipping on orders above ₹2,999 &nbsp;|&nbsp; Hallmarked &amp; Certified Jewellery &nbsp;|&nbsp; Easy 30-day Returns ✦</div>
+
+  <header>
+    <div class="header-badge">Est. 2020 · Tasgaon, Maharashtra</div>
+    <h1>Bridal <em>Bliss</em> Shop</h1>
+    <p>Your one-stop destination for bridal elegance</p>
+    <nav>
+      <a onclick="showPage('landing')">✦ Welcome</a>
+      <a onclick="showPage('home')">Home</a>
+      <a class="active">Jewellery</a>
+      <a onclick="showPage('cosmetics')">Cosmetics</a>
+      <a onclick="showPage('sandals')">Sandals</a>
+      <a onclick="showPage('dress')">Dress</a>
+      <a onclick="showPage('lehenga')">Lehenga</a>
+      <a onclick="showPage('saree')">Saree</a>
+    </nav>
+  </header>
+
+  <!-- Jewellery Hero -->
+  <div class="jwl-hero">
+    <p class="jwl-hero-label">✦ Bridal Jewellery Collection 2026 ✦</p>
+    <h2>Where Every Gem Tells<br><em>Your Story</em></h2>
+    <p>Discover handcrafted jewellery that celebrates your most precious moments. From timeless diamonds to vibrant gemstones — elegance, always.</p>
+  </div>
+
+  <div class="jwl-ornament">— ✦ ◆ ✦ —</div>
+
+  <div class="jwl-section-title">
+    <h2>Our Jewellery Collection</h2>
+    <p>Handpicked Treasures</p>
+    <div class="jwl-title-line"></div>
+  </div>
+
+  <div class="jwl-collection">
+    <div class="jwl-grid">
+
+      <div class="jwl-card">
+        <span class="jwl-card-badge">Bestseller</span>
+        <img class="jwl-card-img" src="https://i5.walmartimages.com/seo/Relanfenk-Rings-for-Women-Girls-Silver-Bridal-Zircon-Diamond-Elegant-Engagement-Wedding-Band-Ring_7489d8b4-1869-4524-916f-e3eebe30c7af.7597fda62aebae63fa30bd620ad12cb7.jpeg" alt="Diamond Ring">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Diamond Ring</div>
+          <div class="jwl-card-sub">18k White Gold · Certified SI1</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹24,999</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <img class="jwl-card-img" src="https://assets0.mirraw.com/images/7327305/RF19_TD_12_large.jpeg?1566902591" alt="Gold Necklace">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Gold Necklace</div>
+          <div class="jwl-card-sub">22k Hallmarked Gold · Handcrafted</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹38,500</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <span class="jwl-card-badge">New</span>
+        <img class="jwl-card-img" src="https://i.etsystatic.com/5698877/r/il/17a3b9/2434422023/il_794xN.2434422023_b30i.jpg" alt="Silver Bracelet">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Silver Bracelet</div>
+          <div class="jwl-card-sub">925 Sterling Silver · Adjustable</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹3,799</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <img class="jwl-card-img" src="https://i.etsystatic.com/5480020/r/il/239c6a/1731825606/il_794xN.1731825606_aedq.jpg" alt="Pearl Earrings">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Pearl Earrings</div>
+          <div class="jwl-card-sub">Freshwater Pearl · Gold Plated</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹5,299</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <span class="jwl-card-badge">Limited</span>
+        <img class="jwl-card-img" src="https://tse3.mm.bing.net/th/id/OIP.dmrb2j9gf4t9Mjm19I7MDAHaHa?w=1725&h=1725&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ruby Ring">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Ruby Ring</div>
+          <div class="jwl-card-sub">Natural Ruby · 18k Yellow Gold</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹19,499</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <img class="jwl-card-img" src="https://i.pinimg.com/originals/f1/b4/31/f1b431d77b9459cf154d091fb0bfe341.jpg" alt="Platinum Necklace">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Platinum Necklace</div>
+          <div class="jwl-card-sub">950 Platinum · Minimalist Design</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹52,000</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <span class="jwl-card-badge">Trending</span>
+        <img class="jwl-card-img" src="https://i.etsystatic.com/5319385/r/il/e71065/2355240202/il_fullxfull.2355240202_p2c4.jpg" alt="Charm Bracelet">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Charm Bracelet</div>
+          <div class="jwl-card-sub">Sterling Silver · 7 Charms</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹4,599</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <img class="jwl-card-img" src="https://5.imimg.com/data5/SELLER/Default/2023/12/368276094/WO/UF/DT/28378586/bridal-diamond-earrings-chandelier-earrings-long-teardrop-earrings-1000x1000.jpg" alt="Diamond Earrings">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Diamond Earrings</div>
+          <div class="jwl-card-sub">Bridal Collection · SI2 Grade</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹31,999</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <span class="jwl-card-badge">New</span>
+        <img class="jwl-card-img" src="https://www.lamoredesign.com/cdn/shop/products/Halodiamondpearemeraldringstockrosegolddeepcurvedweddingbandlamoredesignjewelry-6_f23749fc-f6e4-4803-8b9c-a9de21d7bb20.jpg?v=1680801080&width=1200" alt="Emerald Ring">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Emerald Ring</div>
+          <div class="jwl-card-sub">Natural Emerald · Rose Gold</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹27,500</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="jwl-card">
+        <img class="jwl-card-img" src="https://i.etsystatic.com/5939762/r/il/1b1b13/1254401874/il_1080xN.1254401874_pnlu.jpg" alt="Rose Gold Necklace">
+        <div class="jwl-card-body">
+          <div class="jwl-card-name">Rose Gold Necklace</div>
+          <div class="jwl-card-sub">14k Rose Gold · Floral Motif</div>
+          <div class="jwl-card-footer">
+            <span class="jwl-card-price">₹16,800</span>
+            <a href="#" class="jwl-card-btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Features Strip -->
+  <div class="jwl-features">
+    <div class="jwl-feat-item"><div class="jwl-feat-icon">💎</div><div class="jwl-feat-title">Certified Gems</div><div class="jwl-feat-desc">IGI &amp; GIA certified stones for every purchase</div></div>
+    <div class="jwl-feat-item"><div class="jwl-feat-icon">🚚</div><div class="jwl-feat-title">Free Shipping</div><div class="jwl-feat-desc">On all orders above ₹2,999 across India</div></div>
+    <div class="jwl-feat-item"><div class="jwl-feat-icon">🔁</div><div class="jwl-feat-title">Easy Returns</div><div class="jwl-feat-desc">30-day hassle-free returns &amp; exchanges</div></div>
+    <div class="jwl-feat-item"><div class="jwl-feat-icon">🔒</div><div class="jwl-feat-title">Secure Payment</div><div class="jwl-feat-desc">100% encrypted &amp; safe checkout</div></div>
+    <div class="jwl-feat-item"><div class="jwl-feat-icon">💍</div><div class="jwl-feat-title">Custom Orders</div><div class="jwl-feat-desc">Bespoke jewellery crafted just for you</div></div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="jwl-contact" id="jwl-contact">
+    <div class="jwl-section-title">
+      <h2>Get in Touch</h2>
+      <p>We'd Love to Hear from You</p>
+      <div class="jwl-title-line"></div>
+    </div>
+    <br>
+    <div class="jwl-contact-grid">
+      <div class="jwl-contact-info">
+        <h3>Contact Details</h3>
+        <div class="jwl-contact-item">
+          <div class="jwl-contact-icon">📍</div>
+          <div class="jwl-contact-text">
+            <strong>Visit Our Store</strong>
+            <span>Main Market Road, Tasgaon – 416 312<br>Maharashtra, India</span>
+          </div>
+        </div>
+        <div class="jwl-contact-item">
+          <div class="jwl-contact-icon">📞</div>
+          <div class="jwl-contact-text">
+            <strong>Call Us</strong>
+            <span>+91 98765 43210<br>+91 0232-123 4567</span>
+          </div>
+        </div>
+        <div class="jwl-contact-item">
+          <div class="jwl-contact-icon">✉️</div>
+          <div class="jwl-contact-text">
+            <strong>Email Us</strong>
+            <span>bridalbliss@example.com</span>
+          </div>
+        </div>
+        <div class="jwl-contact-item">
+          <div class="jwl-contact-icon">🕐</div>
+          <div class="jwl-contact-text">
+            <strong>Store Hours</strong>
+            <span>Mon – Sat: 10:00 AM – 8:00 PM<br>Sunday: 11:00 AM – 6:00 PM</span>
+          </div>
+        </div>
+      </div>
+      <div class="jwl-contact-form">
+        <h3>Send a Message</h3>
+        <div class="jwl-form-group"><input type="text" placeholder="Your Full Name"></div>
+        <div class="jwl-form-group"><input type="email" placeholder="Email Address"></div>
+        <div class="jwl-form-group"><input type="tel" placeholder="Phone Number"></div>
+        <div class="jwl-form-group"><textarea placeholder="Your message or enquiry…"></textarea></div>
+        <button class="jwl-btn-submit">Send Message ✦</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-name">Bridal Bliss Shop</div>
+    <p><a href="tel:+919876543210">+91-9876543210</a> &nbsp;·&nbsp; <a href="mailto:bridalbliss@example.com">bridalbliss@example.com</a></p>
+    <p>Bridal Bliss Shop, Main Market Road, Tasgaon, Maharashtra, India</p>
+    <div class="footer-divider"></div>
+    <p class="copyright">&copy; 2026 Bridal Bliss Shop · All Rights Reserved</p>
+  </footer>
+</div>
+
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function scrollToSection(id) {
+    showPage('home');
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }
+
+  // Filter button toggle (visual only) — works across all pages
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Cosmetics filter tabs toggle
+  document.querySelectorAll('.cos-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      this.closest('.cos-filter-tabs').querySelectorAll('.cos-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Add to Cart feedback (cosmetics)
+  document.querySelectorAll('.cos-add-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const orig = this.textContent;
+      this.textContent = '✓ Added!';
+      this.style.background = 'var(--cos-rose)';
+      this.style.color = '#fff';
+      this.style.borderColor = 'var(--cos-rose)';
+      setTimeout(() => {
+        this.textContent = orig;
+        this.style.background = '';
+        this.style.color = '';
+        this.style.borderColor = '';
+      }, 1800);
+    });
+  });
+
+  // Landing page — generate floating petals
+  (function() {
+    const wrap = document.getElementById('landingPetals');
+    if (!wrap) return;
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('div');
+      p.className = 'landing-petal';
+      const size = 8 + Math.random() * 14;
+      p.style.cssText = `
+        left: ${Math.random() * 100}%;
+        width: ${size}px;
+        height: ${size * 1.3}px;
+        animation-duration: ${7 + Math.random() * 10}s;
+        animation-delay: ${Math.random() * 12}s;
+        opacity: ${0.4 + Math.random() * 0.5};
+        transform: rotate(${Math.random() * 360}deg);
+      `;
+      wrap.appendChild(p);
+    }
+  })();
+</script>
+</body>
+</html>
